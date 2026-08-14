@@ -12,6 +12,9 @@ while True:
 
     choice = input("Enter your choice: ")
 
+    # ---------------------------
+    # Add Book
+    # ---------------------------
     if choice == "1":
 
         book_id = input("Enter Book ID: ")
@@ -20,18 +23,51 @@ while True:
 
         book = Book(book_id, title, author)
 
+        # Save book to file
+        file = open("books.txt", "a")
+        file.write(book_id + "," + title + "," + author + ",Available\n")
+        file.close()
+
         print("\nBook Added Successfully!\n")
         book.display()
 
+    # ---------------------------
+    # View Books
+    # ---------------------------
     elif choice == "2":
 
-        print("\nNo books available.\n")
+        file = open("books.txt", "r")
+        books = file.readlines()
+        file.close()
 
+        if len(books) == 0:
+            print("\nNo books found.\n")
+
+        else:
+            print("\nBook Details\n")
+
+            for book in books:
+
+                data = book.strip().split(",")
+
+                print("------------------------")
+                print("Book ID :", data[0])
+                print("Title   :", data[1])
+                print("Author  :", data[2])
+                print("Status  :", data[3])
+                print()
+
+    # ---------------------------
+    # Exit
+    # ---------------------------
     elif choice == "3":
 
         print("\nThank you for using Library Management System!")
         break
 
+    # ---------------------------
+    # Invalid Choice
+    # ---------------------------
     else:
 
         print("\nInvalid Choice!")
