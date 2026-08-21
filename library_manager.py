@@ -9,7 +9,8 @@ while True:
     print("1. Add Book")
     print("2. View Books")
     print("3. Search Book")
-    print("4. Exit")
+    print("4. Delete Book")
+    print("5. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -92,9 +93,40 @@ while True:
             print("\nBook not found.\n")
 
     # ---------------------------
-    # Exit
+    # Delete Book
     # ---------------------------
     elif choice == "4":
+
+        delete_id = input("Enter Book ID to delete: ")
+
+        file = open("books.txt", "r")
+        books = file.readlines()
+        file.close()
+
+        found = False
+
+        file = open("books.txt", "w")
+
+        for book in books:
+
+            data = book.strip().split(",")
+
+            if data[0] != delete_id:
+                file.write(book)
+            else:
+                found = True
+
+        file.close()
+
+        if found:
+            print("\nBook deleted successfully!\n")
+        else:
+            print("\nBook not found.\n")
+
+    # ---------------------------
+    # Exit
+    # ---------------------------
+    elif choice == "5":
 
         print("\nThank you for using Library Management System!")
         break
