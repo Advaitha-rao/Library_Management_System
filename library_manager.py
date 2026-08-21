@@ -8,7 +8,8 @@ while True:
 
     print("1. Add Book")
     print("2. View Books")
-    print("3. Exit")
+    print("3. Search Book")
+    print("4. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -58,9 +59,42 @@ while True:
                 print()
 
     # ---------------------------
-    # Exit
+    # Search Book
     # ---------------------------
     elif choice == "3":
+
+        search_id = input("Enter Book ID to search: ")
+
+        file = open("books.txt", "r")
+        books = file.readlines()
+        file.close()
+
+        found = False
+
+        for book in books:
+
+            data = book.strip().split(",")
+
+            if data[0] == search_id:
+
+                print("\nBook Found\n")
+                print("------------------------")
+                print("Book ID :", data[0])
+                print("Title   :", data[1])
+                print("Author  :", data[2])
+                print("Status  :", data[3])
+                print()
+
+                found = True
+                break
+
+        if not found:
+            print("\nBook not found.\n")
+
+    # ---------------------------
+    # Exit
+    # ---------------------------
+    elif choice == "4":
 
         print("\nThank you for using Library Management System!")
         break
